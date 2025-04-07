@@ -3,7 +3,7 @@ import { createParser } from "nuqs/server";
 import { z } from "zod";
 
 import { dataTableConfig } from "@/config/data-table";
-import { ExtendedSortingState, Filter } from "@/types/data-table";
+import { ExtendedSortingState, Filter } from "@/config/data-table/types";
 
 export const sortingItemSchema = z.object({
   id: z.string(),

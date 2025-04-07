@@ -39,7 +39,7 @@ export function BankAccountsTable({ bankAccounts }: BankAccountsTableProps) {
     pageCount: 1,
     enableAdvancedFilter: true,
     initialState: {
-      sorting: [{ id: "createdAt", desc: true }],
+      // sorting: [{ id: "createdAt", desc: true }],
       columnPinning: { right: ["actions"] },
     },
     getRowId: (originalRow) => originalRow._id.toString(),

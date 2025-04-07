@@ -1,6 +1,5 @@
 "use client";
 
-import type { DataTableFilterField, ExtendedSortingState } from "@/types/data-table";
 import {
   type ColumnFiltersState,
   type PaginationState,
@@ -31,18 +30,22 @@ import * as React from "react";
 
 import { useDebouncedCallback } from "@/hooks/use-debounced-callback";
 import { getSortingStateParser } from "@/lib/parsers";
+import {
+  DataTableFilterField,
+  ExtendedSortingState,
+} from "@/config/data-table/types";
 
 interface UseDataTableProps<TData>
   extends Omit<
-  TableOptions<TData>,
-  | "state"
-  | "pageCount"
-  | "getCoreRowModel"
-  | "manualFiltering"
-  | "manualPagination"
-  | "manualSorting"
-  >,
-  Required<Pick<TableOptions<TData>, "pageCount">> {
+      TableOptions<TData>,
+      | "state"
+      | "pageCount"
+      | "getCoreRowModel"
+      | "manualFiltering"
+      | "manualPagination"
+      | "manualSorting"
+    >,
+    Required<Pick<TableOptions<TData>, "pageCount">> {
   filterFields?: DataTableFilterField<TData>[];
   history?: "push" | "replace";
   scroll?: boolean;
@@ -94,26 +97,26 @@ export function useDataTable<TData>({
   ]);
 
   const [rowSelection, setRowSelection] = React.useState<RowSelectionState>(
-    initialState?.rowSelection ?? {},
+    initialState?.rowSelection ?? {}
   );
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>(initialState?.columnVisibility ?? {});
 
   const [page, setPage] = useQueryState(
     "page",
-    parseAsInteger.withOptions(queryStateOptions).withDefault(1),
+    parseAsInteger.withOptions(queryStateOptions).withDefault(1)
   );
   const [perPage, setPerPage] = useQueryState(
     "perPage",
     parseAsInteger
       .withOptions(queryStateOptions)
-      .withDefault(initialState?.pagination?.pageSize ?? 10),
+      .withDefault(initialState?.pagination?.pageSize ?? 10)
   );
   const [sorting, setSorting] = useQueryState(
     "sort",
     getSortingStateParser<TData>()
       .withOptions(queryStateOptions)
-      .withDefault(initialState?.sorting ?? []),
+      .withDefault(initialState?.sorting ?? [])
   );
 
   // Create parsers for each filter field
@@ -124,7 +127,7 @@ export function useDataTable<TData>({
       if (field.options) {
         // Faceted filter
         acc[field.id] = parseAsArrayOf(parseAsString, ",").withOptions(
-          queryStateOptions,
+          queryStateOptions
         );
       } else {
         // Search filter
@@ -138,7 +141,7 @@ export function useDataTable<TData>({
 
   const debouncedSetFilterValues = useDebouncedCallback(
     setFilterValues,
-    debounceMs,
+    debounceMs
   );
 
   const pagination: PaginationState = {
@@ -177,7 +180,7 @@ export function useDataTable<TData>({
             }
             return filters;
           },
-          [],
+          []
         );
   }, [filterValues, enableAdvancedFilter]);
 
@@ -236,7 +239,7 @@ export function useDataTable<TData>({
       filterableColumns,
       searchableColumns,
       setPage,
-    ],
+    ]
   );
 
   const table = useReactTable({

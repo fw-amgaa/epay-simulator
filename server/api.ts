@@ -29,8 +29,6 @@ async function callApi<T, B = unknown>(
         body: body ? JSON.stringify(body) : undefined,
       });
 
-      console.log(response);
-
       return handleApiResponse<T>(response);
     })()
   );
