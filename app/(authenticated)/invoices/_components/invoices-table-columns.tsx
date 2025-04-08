@@ -109,6 +109,45 @@ export function getColumns({}: GetColumnsProps): ColumnDef<Invoice>[] {
     },
     {
       meta: {
+        title: "Илгээгч банк",
+      },
+      accessorKey: "paid.bankCode",
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Илгээгч банк" />
+      ),
+      cell: ({ row }) => (
+        <div>
+          {row.original.paid?.bankCode
+            ? getBankName(row.original.paid?.bankCode)
+            : "-"}
+        </div>
+      ),
+      enableSorting: false,
+    },
+    {
+      meta: {
+        title: "Илгээгч дансны дугаар",
+      },
+      accessorKey: "paid.accountNumber",
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Илгээгч дансны дугаар" />
+      ),
+      cell: ({ row }) => <div>{row.original.paid?.accountNumber || "-"}</div>,
+      enableSorting: false,
+    },
+    {
+      meta: {
+        title: "Илгээгч дансны нэр",
+      },
+      accessorKey: "paid?.accountName",
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Илгээгч дансны нэр" />
+      ),
+      cell: ({ row }) => <div>{row.original.paid?.accountName || "-"}</div>,
+      enableSorting: false,
+    },
+    {
+      meta: {
         title: "Гүйлгээний утга",
       },
       accessorKey: "description",
