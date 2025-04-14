@@ -9,10 +9,9 @@ export default async function login(input: {
   customerCode: string;
 }) {
   try {
-    await signIn("credentials", input);
+    await signIn("credentials", { ...input, redirect: false });
     return { success: true, error: "" };
   } catch (error) {
-    console.error("wtf", error);
     if (error instanceof AuthError) {
       switch (error.type) {
         case "CredentialsSignin":
