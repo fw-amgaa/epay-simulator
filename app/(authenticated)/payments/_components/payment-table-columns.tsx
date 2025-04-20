@@ -98,7 +98,9 @@ export function getColumns({}: GetColumnsProps): ColumnDef<Payment>[] {
       header: ({ column }) => (
         <DataTableColumnHeader column={column} title="Гүйлгээний дүн" />
       ),
-      cell: ({ row }) => <div>{currencyFormat(row.getValue("amount"))}</div>,
+      cell: ({ row }) => (
+        <div>{currencyFormat(row.getValue("amount") || 0)}</div>
+      ),
       enableSorting: false,
     },
     {

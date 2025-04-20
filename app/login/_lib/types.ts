@@ -28,16 +28,6 @@ export type ApiKey = {
   key: string;
 };
 
-// {
-//   "_id": "67e5271db2af9b757671a5e1",
-//   "customerName": "Enkhsod",
-//   "customerCode": "10222",
-//   "isMerchant": true,
-//   "merchantCategoryCode": "8999",
-//   "bankAccounts": [],
-//   "__v": 0
-// }
-
 export type Customer = {
   _id: string;
   customerName: string;
